@@ -92,6 +92,7 @@ const ScreenRecorder: React.FC = () => {
     if (recorder) {
       recorder.stop();
       setIsRecording(false);
+      setRecorder(null);
     }
   };
 
