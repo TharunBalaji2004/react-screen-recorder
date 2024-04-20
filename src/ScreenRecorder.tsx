@@ -9,6 +9,12 @@ const ScreenRecorder: React.FC = () => {
   const [timer, setTimer] = useState<number>(0);
 
   useEffect(() => {
+    window.onbeforeunload = function() {
+      return "Do you want to refresh the window?"
+    }
+  }, []);
+
+  useEffect(() => {
     if (!isRecording) {
         setTimer(0)
     } else {
