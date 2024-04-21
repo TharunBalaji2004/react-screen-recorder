@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast"
 import ScreenRecorder from "./ScreenRecorder"
 
 function App() {
@@ -5,6 +6,7 @@ function App() {
   return (
     <>
       <ScreenRecorder />
+      <Toaster />
     </>
   )
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import toast from "react-hot-toast"; 
 
 const ScreenRecorder: React.FC = () => {
   const [stream, setStream] = useState<MediaStream | null>(null);
@@ -36,8 +37,14 @@ const ScreenRecorder: React.FC = () => {
     if (!isRecording) {
       navigator.mediaDevices
         .getDisplayMedia(getVideoConstraints(videoQuality))
-        .then((stream) => setStream(stream))
-        .catch((err) => console.error("Error accessing screen:", err));
+        .then((stream) => {
+          setStream(stream)
+          toast.success("Screen sharing started");
+        })
+        .catch((err) => {
+          console.error("Error accessing screen:", err)
+          toast.error("Error accessing screen. Please try again.")
+        });
     } else {
       if (stream) {
         stream.getTracks().forEach((track) => track.stop());
@@ -85,6 +92,9 @@ const ScreenRecorder: React.FC = () => {
       mediaRecorder.start();
       setIsRecording(true);
       setRecorder(mediaRecorder);
+      toast.success("Recording started");
+    } else {
+      toast.error("No stream to record. Please start screen sharing first.");
     }
   };
 
